@@ -2,9 +2,9 @@
 
     package="com.hcw2175.library.qrscan">
 
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:supportsRtl="true">
+    <application android:allowBackup="true" android:label="@string/app_name" android:supportsRtl="true">
 
+        <!-- zxing扫描界面 -->
+        <activity android:name="com.google.zxing.android.CaptureActivity" />
     </application>
-
 </manifest>

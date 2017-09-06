@@ -8,9 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.zxing.Consants;
-import com.google.zxing.android.CaptureActivity;
-import com.hcw2175.library.qrscan.QRScanUtil;
+import com.hcw2175.library.qrscan.QRCodeConstants;
+import com.hcw2175.library.qrscan.QRScanActivity;
 import com.hcw2175.qrscan.permission.ActivityPermissionRequestListener;
 import com.hcw2175.qrscan.permission.PermissionCodes;
 import com.hcw2175.qrscan.permission.PermissionRequestHandler;
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+        Intent intent = new Intent(MainActivity.this, QRScanActivity.class);
         startActivityForResult(intent, REQUEST_CODE_SCAN);
     }
 
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 扫描二维码/条码回传
         if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
             if (data != null) {
-                String content = data.getStringExtra(Consants.CODED_CONTENT);
+                String content = data.getStringExtra(QRCodeConstants.SCAR_RESULT);
                 mTextResult.setText("扫描结果为：" + content);
             }
         }

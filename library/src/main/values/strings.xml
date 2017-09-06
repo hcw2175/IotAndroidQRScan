@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">二维码扫码工具</string>
+
+    <!-- 权限提示 -->
+    <string name="permission_no">权限申请失败</string>
+    <string name="permission_reject_sdcard">我们需要权限存储一些数据到外置SD卡中，否则APP无法正常使用哦！</string>
+    <string name="permission_reject_camera">我们需要相机拍照的权限，否则APP无法正常使用哦！</string>
+    <string name="permission_reject">我们需要您授予一些权限，否则APP无法正常使用哦！</string>
+    <string name="permission_action_setting">去设置</string>
+    <string name="permission_action_reject">拒绝</string>
+
+    <!--zxing-->
+    <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
+    <string name="button_ok">OK</string>
+    <string name="viewfinderview_status_text1">将二维码放入取景框内</string>
+    <string name="viewfinderview_status_text2">即可自动扫描</string>
+</resources>

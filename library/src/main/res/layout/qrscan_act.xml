@@ -19,25 +19,15 @@
         android:background="@drawable/scan_mask">
 
         <ImageView
-            android:id="@+id/top_mask"
+            android:id="@+id/btn_flash_light"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:alpha="0.5"
             android:onClick="btn"
-            android:src="@drawable/s_light"/>
-
-        <!--<ImageView
-            android:id="@+id/top_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:alpha="0.5"
-            android:onClick="btn"
-            android:src="@drawable/s_left_jiantou"/>-->
+            android:src="@drawable/flash_light"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
     <RelativeLayout

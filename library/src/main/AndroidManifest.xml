@@ -6,7 +6,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
-        <activity android:name=".QRScanActivity" />
+        <activity android:name=".QRScanActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
     </application>
 </manifest>

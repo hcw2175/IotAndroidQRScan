@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
@@ -29,7 +30,7 @@ import java.io.IOException;
  * @author hucw
  * @version 0.0.3
  */
-public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.Callback, View.OnClickListener {
     private static final String TAG = "QRScanActivity";
 
     /** 扫码成功提示音音量，值：{@value} **/
@@ -44,10 +45,12 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
     // UI Fields
     private RelativeLayout mContainer = null;
     private RelativeLayout mCropLayout = null;
+    private ImageView mBtnFlashLight = null;
 
     private boolean hasSurface = false;
     private boolean playBeep = true;
     private boolean vibrate = true;
+    private boolean isFlashLightOpen = false;
     
     private int x = 0;
     private int y = 0;
@@ -63,6 +66,7 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
         // 界面控件初始化
         mContainer = (RelativeLayout) findViewById(R.id.capture_containter);
         mCropLayout = (RelativeLayout) findViewById(R.id.capture_crop_layout);
+        mBtnFlashLight = (ImageView) findViewById(R.id.btn_flash_light);
 
         // 扫描动画初始化
         initScannerAnimation();
@@ -127,6 +131,15 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         hasSurface = false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        /*switch (v.getId()) {
+            case :
+
+                break;
+        }*/
     }
 
     /**

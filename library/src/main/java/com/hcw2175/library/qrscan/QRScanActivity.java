@@ -18,8 +18,10 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.hcw2175.library.qrscan.camera.CameraManager;
+import com.hcw2175.library.qrscan.decode.DecodeMatcher;
 import com.hcw2175.library.qrscan.listener.ActivityLiveTaskTimer;
 
 import java.io.IOException;
@@ -41,6 +43,7 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
     private QRScanActivityHandler mHandler;
     private ActivityLiveTaskTimer mInactivityTimer;
     private MediaPlayer mMediaPlayer;
+    private DecodeMatcher mDecodeMatcher = null;
 
     // UI Fields
     private RelativeLayout mContainer = null;
@@ -150,15 +153,19 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
     public void onDecodeSuccess(String result) {
         mInactivityTimer.init();
 
-        playBeepSoundAndVibrate();
-        Log.d(TAG, "二维码/条形码 扫描结果: " + result);
+        if (null != result && result.length() == 12) {
+            playBeepSoundAndVibrate();
+            Log.d(TAG, "二维码/条形码 扫描结果: " + result);
 
-        // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
-        // mHandler.sendEmptyMessage(R.id.restart_preview);
-        Intent intent = new Intent();
-        intent.putExtra(QRCodeConstants.SCAR_RESULT, result);
-        this.setResult(RESULT_OK, intent);
-        finish();
+            Intent intent = new Intent();
+            intent.putExtra(QRCodeConstants.SCAR_RESULT, result);
+            this.setResult(RESULT_OK, intent);
+            finish();
+        } else {
+            // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
+            Toast.makeText(this, "扫描结果不合法，请重新扫描", Toast.LENGTH_SHORT).show();
+            mHandler.sendEmptyMessage(R.id.restart_preview);
+        }
     }
 
 
@@ -273,5 +280,12 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
 
     public int getCropHeight() {
         return cropHeight;
+    }
+
+    public DecodeMatcher getDecodeMatcher() {
+        return mDecodeMatcher;
+    }
+    public void setDecodeMatcher(DecodeMatcher mDecodeMatcher) {
+        this.mDecodeMatcher = mDecodeMatcher;
     }
 }

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(MainActivity.this, QRScanActivity.class);
+        intent.putExtra("pattern", "\\w{12}");
         startActivityForResult(intent, REQUEST_CODE_SCAN);
     }
 

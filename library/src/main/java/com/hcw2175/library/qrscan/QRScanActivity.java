@@ -25,6 +25,7 @@ import com.hcw2175.library.qrscan.decode.DecodeMatcher;
 import com.hcw2175.library.qrscan.listener.ActivityLiveTaskTimer;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 /**
  * 二维码扫码Activity
@@ -60,11 +61,18 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
     private int cropWidth = 0;
     private int cropHeight = 0;
 
+    // 校验扫码结果正则表达式
+    private String mPattern = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qrscan_act);
+
+        Bundle params = getIntent().getExtras();
+        if (null != params && params.containsKey("pattern")) {
+            this.mPattern = params.getString("pattern");
+        }
 
         // 界面控件初始化
         mContainer = (RelativeLayout) findViewById(R.id.capture_containter);
@@ -153,7 +161,19 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
     public void onDecodeSuccess(String result) {
         mInactivityTimer.init();
 
-        if (null != result && result.length() == 12) {
+        // 空结果继续扫描
+        if (null == result || result == "") {
+            // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
+            Toast.makeText(this, "扫描结果不合法，请重新扫描", Toast.LENGTH_SHORT).show();
+            mHandler.sendEmptyMessage(R.id.restart_preview);
+            return;
+        }
+        // 正则校验结果
+        boolean isMatch = true;
+        if (null != mPattern && mPattern != "") {
+            isMatch = Pattern.matches(mPattern, result);
+        }
+        if (isMatch) {
             playBeepSoundAndVibrate();
             Log.d(TAG, "二维码/条形码 扫描结果: " + result);
 

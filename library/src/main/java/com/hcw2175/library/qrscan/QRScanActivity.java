@@ -164,7 +164,7 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
         // 空结果继续扫描
         if (null == result || result == "") {
             // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
-            Toast.makeText(this, "扫描结果不合法，请重新扫描", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "扫描结果不合法，请重新扫描", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessage(R.id.restart_preview);
             return;
         }
@@ -183,7 +183,7 @@ public class QRScanActivity extends AppCompatActivity implements SurfaceHolder.C
             finish();
         } else {
             // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
-            Toast.makeText(this, "扫描结果不合法，请重新扫描", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "扫描结果不合法，请重新扫描", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessage(R.id.restart_preview);
         }
     }
